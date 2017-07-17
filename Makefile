@@ -11,6 +11,7 @@ modules-source/znc-clientbuffer:
 
 /usr/bin/znc /usr/bin/znc-buildmod:
 	sudo apt-get install znc znc-dev
+	sudo setcap 'cap_net_bind_service=+ep' /usr/bin/znc
 
 /etc/apt/sources.list.d/teward-znc-trusty.list:
 	sudo add-apt-repository ppa:teward/znc
