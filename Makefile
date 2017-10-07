@@ -1,3 +1,5 @@
+CODENAME=$(shell lsb_release -sc)
+
 modules/clientbuffer.so: \
     modules-source/znc-clientbuffer \
     /usr/bin/znc-buildmod
@@ -13,6 +15,6 @@ modules-source/znc-clientbuffer:
 	sudo apt-get install znc znc-dev
 	sudo setcap 'cap_net_bind_service=+ep' /usr/bin/znc
 
-/etc/apt/sources.list.d/teward-znc-trusty.list:
+/etc/apt/sources.list.d/teward-znc-${CODENAME}.list:
 	sudo add-apt-repository ppa:teward/znc
 	sudo apt-get update
