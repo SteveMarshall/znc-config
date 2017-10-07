@@ -1,3 +1,4 @@
 modules
 modules-source
 **/moddata/**
+znc.pem
