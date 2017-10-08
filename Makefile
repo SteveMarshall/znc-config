@@ -18,3 +18,11 @@ modules-source/znc-clientbuffer:
 /etc/apt/sources.list.d/teward-znc-${CODENAME}.list:
 	sudo add-apt-repository ppa:teward/znc
 	sudo apt-get update
+
+/usr/bin/certbot: | /etc/apt/sources.list.d/certbot-certbot-${CODENAME}.list
+	sudo apt-get install certbot
+
+/etc/apt/sources.list.d/certbot-certbot-${CODENAME}.list:
+	sudo apt-get install software-properties-common
+	sudo add-apt-repository ppa:certbot/certbot
+	sudo apt-get update
