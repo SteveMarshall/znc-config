@@ -1,6 +1,9 @@
 ifndef DOMAIN
 $(error DOMAIN is not set)
 endif
+ifndef CERTBOT_ACCOUNT
+$(error CERTBOT_ACCOUNT is not set)
+endif
 CODENAME=$(shell lsb_release -sc)
 
 modules/clientbuffer.so: \
@@ -21,6 +24,10 @@ modules-source/znc-clientbuffer:
 /etc/apt/sources.list.d/teward-znc-${CODENAME}.list:
 	sudo add-apt-repository ppa:teward/znc
 	sudo apt-get update
+
+/etc/letsencrypt/renewal/${DOMAIN}.conf: certbot-renewal.conf.tpl
+	sudo mkdir -p $(shell dirname $@)
+	sudo sh -c 'sed -e "s/%DOMAIN%/${DOMAIN}/g" -e "s/%CERTBOT_ACCOUNT%/${CERTBOT_ACCOUNT}/g" $< > $@'
 
 /etc/letsencrypt/renewal-hooks/${DOMAIN}/deploy: certbot-hooks/deploy.tpl
 	sudo mkdir -p $(shell dirname $@)
